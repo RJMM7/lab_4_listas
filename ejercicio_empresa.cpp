@@ -109,9 +109,9 @@ void mostrarAdelante(Nodo* head) {
     // Si la lista no esta vacia, muestra los datos de la lista
     Nodo* actual = head;
     while(actual != nullptr) {
-        cout << "ID: " << actual->id << endl;
-        cout << "Nombre: " << actual->nombre << endl;
-        cout << "Peso: " << actual->peso << endl;
+        cout << "-> ID: " << actual->id
+            << ", Nombre: " << actual->nombre
+            << ", Peso: " << actual->peso << endl;
         actual = actual->sig;
     }
 }
