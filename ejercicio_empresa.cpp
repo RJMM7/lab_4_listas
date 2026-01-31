@@ -1,6 +1,7 @@
 #include <iostream>
 using namespace std;
 
+// Estructura del nodo
 struct Nodo {
     int id;
     string nombre;
@@ -10,11 +11,65 @@ struct Nodo {
 
 };
 
+// ----------------------------------------------------------------
+// Funcion que verifica si hay ID repetido
+Nodo* verificadorID(Nodo* head, int id) {
+    Nodo* actual = head;
+
+    while (actual != nullptr) {
+        if (actual->id == id) {
+            return actual;
+        }
+        actual = actual->sig;
+    }
+    return nullptr;
+}
+
+// ----------------------------------------------------------------
+// Funcion insertar paquete al final
+void insertarFinal(Nodo*& head, Nodo*& tail) {
+    int id;
+    cout << "Digite el ID: ";
+    cin >> id;
+
+    // Verifica si el ID ya existe
+    if(verificadorID(head, id) != nullptr) {
+        cout << "El ID digitado ya existe" << endl;
+        return;
+    }
+
+    Nodo* nuevo = new Nodo;
+
+    nuevo->id = id;
+    cout << "Ingrese nombre del paquete: ";
+    cin.ignore();
+    getline(cin, nuevo->nombre);
+
+    cout << "Ingrese el peso del paquete (kg): ";
+    cin >> nuevo->peso;
+
+    nuevo->sig = nullptr;
+    nuevo->ant = tail;
+
+    if (tail == nullptr) {
+        head = tail = nuevo;
+    } else {
+        tail->sig = nuevo;
+        tail = nuevo;
+    }
+
+    cout << "Paquete insertado al final correctamente" << endl;
+}
+
 int main() {
+
+    Nodo* head = nullptr;
+    Nodo* tail = nullptr;
 
     int opcion;
     
     do {
+        // Menu de opciones
         cout << "---------------- MENU ----------------" << endl;
         cout << "1. Insertar paquete al final" << endl;
         cout << "2. Insertar paquete al inicio" << endl;
@@ -29,6 +84,7 @@ int main() {
 
         switch(opcion) {
             case 1:
+                insertarFinal(head, tail);
                 break;
             case 2:
                 break;
@@ -46,11 +102,11 @@ int main() {
                 cout << "Saliendo...";
                 break;
             default:
-                cout << "Error en la seleccion" << endl;
+                cout << "Error en la seleccion, vuelva a intentarlo" << endl;
                 break;
         }
 
-    } while(opcion =! 8);
+    } while(opcion != 8);
     
     return 0;
 }
