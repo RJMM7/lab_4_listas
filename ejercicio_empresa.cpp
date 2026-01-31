@@ -97,6 +97,25 @@ void insertarInicio(Nodo*& head, Nodo*& tail) {
     cout << "Paquete insertado al inicio correctamente" << endl;
 }
 
+// ----------------------------------------------------------------
+// Funcion mostrar lista adelante (desde head a tail)
+void mostrarAdelante(Nodo* head) {
+    // Verifica si la lista esta vacia
+    if(head == nullptr) {
+        cout << "La lista esta vacia" << endl;
+        return;
+    }
+
+    // Si la lista no esta vacia, muestra los datos de la lista
+    Nodo* actual = head;
+    while(actual != nullptr) {
+        cout << "-> ID: " << actual->id
+            << ", Nombre: " << actual->nombre
+            << ", Peso: " << actual->peso << endl;
+        actual = actual->sig;
+    }
+}
+
 int main() {
 
     Nodo* head = nullptr;
@@ -128,6 +147,7 @@ int main() {
                 break;
 
             case 3:
+                mostrarAdelante(head);
                 break;
 
             case 4:
