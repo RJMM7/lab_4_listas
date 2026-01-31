@@ -285,6 +285,8 @@ int main() {
         }
 
     } while(opcion != 8);
+
+    liberarLista(head, tail);
     
     return 0;
 }
