@@ -135,6 +135,96 @@ void mostrarAtras(Nodo* tail) {
     }
 }
 
+/*Funcion buscar paquete por ID*/
+void buscarPorID (Nodo* head){
+    if(head == nullptr) {
+        cout << "La lista esta vacia\n";
+        return;
+    }
+    int ID;
+    cout << "Digite el ID a buscar: ";
+    cin>> ID;
+
+    Nodo* encontrado = verificadorID(head, ID);
+    
+    if(encontrado == nullptr){
+        cout << "No se encontro ningun paquete con el ID: " << ID << '\n';
+
+    } else {
+        cout << "Paquete encontrado: \n";
+        cout << "ID: " << encontrado->id << '\n';
+        cout << " , nombre: " << encontrado->nombre
+        << ", peso: " << encontrado->peso << "Kg " << '\n';
+    }
+}
+
+bool eliminarPorID( Nodo*& head, Nodo*& tail) {
+    if(head == nullptr) {
+        cout << "La lista esta vacia, no hay nada que eliminar. \n";
+        return false; 
+    }
+    int id;
+    cout << " Digite el id a eliminar: ";
+    cin >> id;
+
+    Nodo* actual = verificadorID(head, id);
+    if(actual == nullptr) {
+        cout << "No se encontro el paquete con ID " << id << endl;
+        return false;
+    }
+    /*caso con 1 nodo*/
+    if(head == tail){ 
+        delete actual;
+        head = tail = nullptr;
+        cout << "Paquete eliminado (era el unico en la lista) " << endl;
+        return true;
+    }
+    /*borrar head*/
+    if(actual == head) {
+        head = head->sig;
+        head->ant = nullptr;
+        delete actual;
+        cout << "Paquete eliminado ( se elimino el primero). \n";
+        return true;
+    }
+    /*borrar tail*/
+    if(actual == tail) {
+        tail = tail->ant;
+        tail->sig = nullptr;
+        delete actual;
+        cout << "Paquete eliminado (se elimino el ultimo). \n";
+        return true;
+    }
+    /*borrar en medio*/
+    actual->ant->sig = actual->sig;
+    actual->sig->ant = actual->ant;
+
+    delete actual;
+    cout << "Paquete eliminado (se elimino un nodo de en medio). \n";
+    return true;
+}
+int contarPaquetes(Nodo* head) {
+    int contador = 0;
+    Nodo* actual = head;
+
+    while(actual != nullptr) {
+        contador++;
+        actual = actual->sig;
+    }
+    return contador;
+}
+
+void liberarLista (Nodo*& head, Nodo*& tail){
+    Nodo* actual = head;
+        while(actual != nullptr) {
+            Nodo* aux = actual;
+            actual = actual->sig;
+            delete aux; 
+        }
+        head = nullptr;
+        tail = nullptr;
+}
+
 int main() {
 
     Nodo* head = nullptr;
@@ -174,12 +264,15 @@ int main() {
                 break;
 
             case 5:
+            buscarPorID(head);
                 break;
 
             case 6:
+            eliminarPorID(head, tail);
                 break;
 
             case 7:
+            cout<< "Cantidad de paquetes " << contarPaquetes(head) << endl;
                 break;
 
             case 8:
