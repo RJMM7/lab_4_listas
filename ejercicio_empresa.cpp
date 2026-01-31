@@ -116,6 +116,25 @@ void mostrarAdelante(Nodo* head) {
     }
 }
 
+// ----------------------------------------------------------------
+// Funcion mostrar lista atras (desde tail a head)
+void mostrarAtras(Nodo* tail) {
+    // Verifica si la lista esta vacia
+    if(tail == nullptr) {
+        cout << "La lista esta vacia" << endl;
+        return;
+    }
+
+    // Si la lista no esta vacia, muestra los datos de la lista
+    Nodo* actual = tail;
+    while(actual != nullptr) {
+        cout << "-> ID: " << actual->id
+            << ", Nombre: " << actual->nombre
+            << ", Peso: " << actual->peso << endl;
+        actual = actual->ant;
+    }
+}
+
 int main() {
 
     Nodo* head = nullptr;
@@ -151,6 +170,7 @@ int main() {
                 break;
 
             case 4:
+                mostrarAtras(tail);
                 break;
 
             case 5:
