@@ -51,7 +51,7 @@ void insertarFinal(Nodo*& head, Nodo*& tail) {
     nuevo->sig = nullptr;
     nuevo->ant = tail;
 
-    if (tail == nullptr) {
+    if(tail == nullptr) {
         head = tail = nuevo;
     } else {
         tail->sig = nuevo;
@@ -59,6 +59,42 @@ void insertarFinal(Nodo*& head, Nodo*& tail) {
     }
 
     cout << "Paquete insertado al final correctamente" << endl;
+}
+
+// ----------------------------------------------------------------
+// Funcion insertar paquete al inicio
+void insertarInicio(Nodo*& head, Nodo*& tail) {
+    int id;
+    cout << "Digite el ID: ";
+    cin >> id;
+
+    // Verifica si el ID ya existe
+    if(verificadorID(head, id) != nullptr) {
+        cout << "El ID digitado ya existe" << endl;
+        return;
+    }
+
+    Nodo* nuevo = new Nodo;
+
+    nuevo->id = id;
+    cout << "Ingrese nombre del paquete: ";
+    cin.ignore();
+    getline(cin, nuevo->nombre);
+
+    cout << "Ingrese el peso del paquete (kg): ";
+    cin >> nuevo->peso;
+
+    nuevo->ant = nullptr;
+    nuevo->sig = head;
+
+    if(head == nullptr) {
+        head = tail = nuevo;
+    } else {
+        head->ant = nuevo;
+        head = nuevo;
+    }
+
+    cout << "Paquete insertado al inicio correctamente" << endl;
 }
 
 int main() {
@@ -86,21 +122,30 @@ int main() {
             case 1:
                 insertarFinal(head, tail);
                 break;
+
             case 2:
+                insertarInicio(head, tail);
                 break;
+
             case 3:
                 break;
+
             case 4:
                 break;
+
             case 5:
                 break;
+
             case 6:
                 break;
+
             case 7:
                 break;
+
             case 8:
                 cout << "Saliendo...";
                 break;
+
             default:
                 cout << "Error en la seleccion, vuelva a intentarlo" << endl;
                 break;
