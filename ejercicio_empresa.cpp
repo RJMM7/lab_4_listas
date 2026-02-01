@@ -302,7 +302,11 @@ int main() {
             cout<< "Cantidad de paquetes " << contarPaquetes(head) << endl;
                 break;
 
-            case 8:
+                case 8:
+                editarPaquetePorID(head);
+                break;
+
+            case 9:
                 cout << "Saliendo...";
                 break;
 
