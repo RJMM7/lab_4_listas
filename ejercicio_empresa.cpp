@@ -158,6 +158,33 @@ void buscarPorID (Nodo* head){
     }
 }
 
+/*PUNTO EXTRA
+OPCION B*/
+void editarPaquetePorID(Nodo* head) {
+    if (head == nullptr) {
+        cout << "La lista esta vacia.\n";
+        return;
+    }
+
+    int id;
+    cout << "Digite el ID del paquete a editar: ";
+    cin >> id;
+
+    Nodo* encontrado = verificadorID(head, id);
+    if (encontrado == nullptr) {
+        cout << "No se encontro el paquete.\n";
+        return;
+    }
+
+    cout << "Ingrese el NUEVO nombre (sin espacios): ";
+    cin >> encontrado->nombre;
+
+    cout << "Ingrese el NUEVO peso (kg): ";
+    cin >> encontrado->peso;
+
+    cout << "Paquete editado correctamente.\n";
+}
+
 bool eliminarPorID( Nodo*& head, Nodo*& tail) {
     if(head == nullptr) {
         cout << "La lista esta vacia, no hay nada que eliminar. \n";
